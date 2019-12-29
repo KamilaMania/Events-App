@@ -15,21 +15,21 @@ router.post("/ticket", (req, res, next) => {
     .catch(next);
 });
 
-router.get("/ticket/:key", (req, res, next) => {
-  Event.findByPk(req.params.key)
+router.get("/ticket/:id", (req, res, next) => {
+  Ticket.findByPk(req.params.id)
     .then(ticket => res.send(ticket))
     .catch(next);
 });
 
-router.put("/ticket/:key", (req, res, next) => {
-  Event.findByPk(req.params.key)
+router.put("/ticket/:id", (req, res, next) => {
+  Ticket.findByPk(req.params.id)
     .then(event => event.update(req.body))
     .then(event => res.send(event))
     .catch(next);
 });
 
-router.delete("/ticket/:key", (req, res, next) => {
-  Event.destroy({ where: { key: req.params.key } })
+router.delete("/ticket/:id", (req, res, next) => {
+  Ticket.destroy({ where: { id: req.params.id } })
     .then(number => res.send({ number }))
     .catch(next);
 });

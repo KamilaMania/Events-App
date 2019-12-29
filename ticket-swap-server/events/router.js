@@ -2,7 +2,7 @@ const { Router } = require("express");
 const Event = require("./model");
 const router = new Router();
 
-router.get("/event", (req, res, next) => {
+router.get("/events", (req, res, next) => {
   const limit = req.query.limit || 25;
   const offset = req.query.offset || 0;
   Event.findAndCountAll({ limit, offset })

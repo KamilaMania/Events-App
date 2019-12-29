@@ -1,4 +1,5 @@
 import superagent from "superagent";
+import { toastr } from "react-redux-toastr";
 
 export function signUpSuccess(token) {
   return {
@@ -13,6 +14,7 @@ export function signUp(email, password) {
       .send({ email, password })
       .then(response => {
         console.log("signup response test:", response);
+        toastr.success("Signup Success", "Your account has been created");
       })
       .catch(err => console.log("err", err));
   };

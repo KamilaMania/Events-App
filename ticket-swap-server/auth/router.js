@@ -44,7 +44,7 @@ router.post("/login", async (req, res, next) => {
 });
 router.get("/secret-endpoint", auth, (request, response) => {
   response.send({
-    message: `Thanks for visiting the secret endpoint ${request.player.email}.`
+    message: `Thanks for visiting the secret endpoint ${request.user.email}.`
   });
 });
 

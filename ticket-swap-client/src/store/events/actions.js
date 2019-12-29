@@ -1,9 +1,9 @@
 import superagent from "superagent";
 
-export function logInSuccess(jwt) {
+export function eventSuccess(events) {
   return {
-    type: "LOGIN_SUCCESS",
-    payload: jwt
+    type: "FETCH_EVENT_SUCCESS",
+    payload: events
   };
 }
 
@@ -14,14 +14,13 @@ export function logInSuccess(jwt) {
 //   };
 // }
 
-export function login(email, password) {
+export function fetchEvents() {
   return function thunk(dispatch, getState) {
     superagent
-      .post("http://localhost:4000/login")
-      .send({ email, password })
+      .get("http://localhost:4000/events")
       .then(response => {
-        console.log("login data test", response);
-        const action = logInSuccess(response.body.jwt);
+        console.log("fetch event data test", response);
+        const action = eventSuccess(response.body.data);
         dispatch(action);
       })
       .catch(err => console.log("err", err));

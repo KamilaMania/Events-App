@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { login } from "../store/login/actions";
 import { Link } from "react-router-dom";
+import "./Login.css";
 
 class LoginPage extends React.Component {
   state = {
@@ -24,14 +25,14 @@ class LoginPage extends React.Component {
   };
   render() {
     return (
-      <div>
+      <div className="login-form">
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
           <p>
             <input
               type="email"
               name="email"
-              placeholder="email"
+              placeholder="Email adress"
               value={this.state.email}
               onChange={this.handleChange}
             />
@@ -40,17 +41,19 @@ class LoginPage extends React.Component {
             <input
               type="password"
               name="password"
-              placeholder="password"
+              placeholder="Password"
               value={this.state.password}
               onChange={this.handleChange}
             />
           </p>
           <p>
-            <button type="submit">Login</button>
+            <button className="button" type="submit">
+              Login
+            </button>
           </p>
         </form>
         <div>
-          If you dont have an account you can create one{" "}
+          If you dont have an account please create one{" "}
           <Link to="/signup">here</Link>
         </div>
       </div>

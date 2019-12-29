@@ -5,6 +5,7 @@ import App from "./App";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import { BrowserRouter as Router } from "react-router-dom";
+import "react-redux-toastr/lib/css/react-redux-toastr.min.css";
 
 ReactDOM.render(
   <Provider store={store}>

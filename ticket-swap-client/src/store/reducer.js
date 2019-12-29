@@ -1,9 +1,13 @@
 import { combineReducers } from "redux";
 
 import authReducer from "./signup/reducer";
+import logoutReducer from "./logout/reducer";
+import { reducer as toastrReducer } from "react-redux-toastr";
+import eventsReducer from "./events/reducer";
 
 export default combineReducers({
-  signUp: authReducer
-
-  // we can add "slice" subreducers here later on...
+  signUp: authReducer,
+  lougOut: logoutReducer,
+  toastr: toastrReducer,
+  events: eventsReducer
 });

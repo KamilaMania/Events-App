@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { signUp } from "../store/signup/actions";
+import "./Signup.css";
+import { toastr } from "react-redux-toastr";
 
 class SignUp extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    confirmPassword: ""
   };
   handleChange = event => {
     this.setState({
@@ -14,28 +17,30 @@ class SignUp extends Component {
   };
   handleSubmit = event => {
     event.preventDefault();
-    alert("Your account has been created!", this.state.value);
-    const { email, password } = this.state;
-    const action = signUp(email, password);
-    this.props.dispatch(action);
-    this.props.history.push(`/login`);
+    if (this.state.password === this.state.confirmPassword) {
+      const { email, password } = this.state;
+      const action = signUp(email, password);
+      this.props.dispatch(action);
+      this.props.history.push(`/login`);
+    } else {
+      toastr.error("Signup error", "The password do not match");
+    }
   };
   render() {
     return (
-      <div>
+      <div className="signup-form">
         <h1>Register</h1>
         <div>
           <form onSubmit={this.handleSubmit}>
-            E-mail adress:
             <input
               name="email"
-              type="text"
-              placeholder="E-mail"
+              type="email"
+              placeholder="E-mail adress"
               value={this.state.email}
               onChange={this.handleChange}
             />
             <br />
-            Password:
+
             <input
               name="password"
               type="password"
@@ -44,7 +49,18 @@ class SignUp extends Component {
               onChange={this.handleChange}
             />
             <br />
-            <button type="submit">Register</button>
+
+            <input
+              name="confirmPassword"
+              type="password"
+              placeholder="Password"
+              value={this.state.confirmPassword}
+              onChange={this.handleChange}
+            />
+            <br />
+            <button className="button" type="submit">
+              Register
+            </button>
           </form>
         </div>
       </div>
