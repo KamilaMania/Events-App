@@ -2,6 +2,7 @@ import React from "react";
 import { fetchEvents } from "../store/events/actions";
 import { connect } from "react-redux";
 import EventsList from "./EventsList";
+import EventForm from "./EventForm";
 
 class Homepage extends React.Component {
   componentDidMount() {
@@ -13,6 +14,7 @@ class Homepage extends React.Component {
         {this.props.events.map((event, i) => (
           <EventsList key={i} data={event} />
         ))}
+        <EventForm />
       </div>
     );
   }
