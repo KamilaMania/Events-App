@@ -3,15 +3,15 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { Provider } from "react-redux";
-import store from "./store/store";
-import { BrowserRouter as Router } from "react-router-dom";
+import store, { history } from "./store/store";
 import "react-redux-toastr/lib/css/react-redux-toastr.min.css";
+import { ConnectedRouter } from "connected-react-router";
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
+    <ConnectedRouter history={history}>
       <App />
-    </Router>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById("root")
 );

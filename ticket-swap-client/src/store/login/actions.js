@@ -7,13 +7,6 @@ export function logInSuccess(jwt) {
   };
 }
 
-// export function logOut(jwt) {
-//   return {
-//     type: "auth/LOG_OUT",
-//     payload: jwt
-//   };
-// }
-
 export function login(email, password) {
   return function thunk(dispatch, getState) {
     superagent

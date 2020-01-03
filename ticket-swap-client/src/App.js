@@ -8,6 +8,7 @@ import Homepage from "./components/Homepage";
 import Event from "./components/Event";
 import ReduxToastr from "react-redux-toastr";
 import EventsList from "./components/EventsList";
+import EventForm from "./components/EventForm";
 
 class App extends Component {
   render() {
@@ -21,10 +22,11 @@ class App extends Component {
         </div>
 
         <Switch>
-          <Route path="/signup" component={SignUp} />
-          <Route path="/login" component={LogInPage} />
-          <Route path="/events" component={EventsList} />
-          <Route path="/event/:id" component={Event} />
+          <Route path="/signup" exact component={SignUp} />
+          <Route path="/login" exact component={LogInPage} />
+          <Route path="/events" exact component={EventsList} />
+          <Route path="/event/:id" exact component={Event} />
+          <Route path="/event/edit/:id" exact component={EventForm} />
 
           {/* <Route path="/logout" component={LogoutPage} /> */}
           <Route component={Homepage} />

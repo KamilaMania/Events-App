@@ -39,7 +39,7 @@ select {
   box-sizing: border-box;
 } */
 
-input[name="description"],
+textarea[name="description"],
 select {
   width: 40%;
   padding: 12px 20px;

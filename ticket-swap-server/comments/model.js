@@ -6,7 +6,7 @@ const Comment = sequelize.define("comment", {
     type: Sequelize.STRING,
     allowNull: false
   },
-  commentText: {
+  content: {
     type: Sequelize.STRING(500),
     allowNull: false
   }

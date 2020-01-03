@@ -1,21 +1,35 @@
-import React, { Component } from "react";
+import React from "react";
 import "./EventForm.css";
-// import { makeStyles } from "@material-ui/core/styles";
-// import Card from "@material-ui/core/Card";
-// import CardActionArea from "@material-ui/core/CardActionArea";
-// import CardActions from "@material-ui/core/CardActions";
-// import CardContent from "@material-ui/core/CardContent";
-// import CardMedia from "@material-ui/core/CardMedia";
-// import Button from "@material-ui/core/Button";
-// import Typography from "@material-ui/core/Typography";
-// import { connect } from "react-redux";
+import { createEvent, editEvent } from "../store/events/actions";
+import { connect } from "react-redux";
+import { fetchEvent } from "../store/events/actions";
 
-export default class EventForm extends Component {
-  state = {};
-
+class EventForm extends React.Component {
+  state = {
+    title: "",
+    urlLogo: "",
+    description: "",
+    startDate: "",
+    endDate: ""
+  };
   handleSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit(this.state);
+    const id = parseInt(this.props.path.split("/").pop());
+    console.log(id);
+    if (id) {
+      const event = Object.assign({}, this.state, {
+        startDate: new Date(this.state.startDate),
+        endDate: new Date(this.state.endDate),
+        id: id
+      });
+      this.props.put(event);
+    } else {
+      const event = Object.assign({}, this.state, {
+        startDate: new Date(this.state.startDate),
+        endDate: new Date(this.state.endDate)
+      });
+      this.props.post(event);
+    }
   };
 
   handleChange = event => {
@@ -26,6 +40,26 @@ export default class EventForm extends Component {
     });
   };
 
+  componentDidMount() {
+    const id = parseInt(this.props.path.split("/").pop());
+    if (id) {
+      this.props.fetch(id);
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.event !== this.props.event) {
+      this.setState({
+        title: nextProps.event.title,
+        urlLogo: nextProps.event.urlLogo,
+        description: nextProps.event.description,
+        startDate: new Date(nextProps.event.startDate)
+          .toISOString()
+          .split("T")[0],
+        endDate: new Date(nextProps.event.endDate).toISOString().split("T")[0]
+      });
+    }
+  }
+
   render() {
     const initialValues = this.props.initialValues || {};
     return (
@@ -35,6 +69,7 @@ export default class EventForm extends Component {
           <br />
           <input
             name="title"
+            type="text"
             id="title"
             value={
               this.state.title !== undefined
@@ -42,6 +77,7 @@ export default class EventForm extends Component {
                 : initialValues.title || ""
             }
             onChange={this.handleChange}
+            required
           />
         </div>
 
@@ -50,6 +86,7 @@ export default class EventForm extends Component {
           <br />
           <input
             name="urlLogo"
+            type="text"
             id="urlLogo"
             value={
               this.state.urlLogo !== undefined
@@ -57,14 +94,16 @@ export default class EventForm extends Component {
                 : initialValues.urlLogo || ""
             }
             onChange={this.handleChange}
+            required
           />
         </div>
 
         <div>
           <label htmlFor="description">Event description</label>
           <br />
-          <input
+          <textarea
             name="description"
+            type="text"
             id="description"
             value={
               this.state.description !== undefined
@@ -72,7 +111,8 @@ export default class EventForm extends Component {
                 : initialValues.description || ""
             }
             onChange={this.handleChange}
-          />
+            required
+          ></textarea>
         </div>
 
         <div>
@@ -80,6 +120,7 @@ export default class EventForm extends Component {
           <br />
           <input
             name="startDate"
+            type="date"
             id="startDate"
             value={
               this.state.startDate !== undefined
@@ -87,6 +128,7 @@ export default class EventForm extends Component {
                 : initialValues.startDate || ""
             }
             onChange={this.handleChange}
+            required
           />
         </div>
 
@@ -95,6 +137,7 @@ export default class EventForm extends Component {
           <br />
           <input
             name="endDate"
+            type="date"
             id="endDate"
             value={
               this.state.endDate !== undefined
@@ -102,6 +145,7 @@ export default class EventForm extends Component {
                 : initialValues.endDate || ""
             }
             onChange={this.handleChange}
+            required
           />
         </div>
 
@@ -112,3 +156,16 @@ export default class EventForm extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    post: event => dispatch(createEvent(event)),
+    put: event => dispatch(editEvent(event)),
+    fetch: id => dispatch(fetchEvent(id))
+  };
+};
+const mapStateToProps = state => ({
+  path: state.router.location.pathname,
+  event: state.event.event
+});
+export default connect(mapStateToProps, mapDispatchToProps)(EventForm);

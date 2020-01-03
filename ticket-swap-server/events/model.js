@@ -142,8 +142,8 @@ sequelize
     })
   )
 
-  .then(movie => {
-    console.log(movie.toJSON());
+  .then(event => {
+    console.log(event.toJSON());
   })
   .catch(error => console.log(error));
 

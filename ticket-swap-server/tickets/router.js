@@ -2,10 +2,16 @@ const { Router } = require("express");
 const Ticket = require("./model");
 const router = new Router();
 
-router.get("/ticket", (req, res, next) => {
+router.get("/tickets/:eventId", (req, res, next) => {
   const limit = req.query.limit || 25;
   const offset = req.query.offset || 0;
-  Ticket.findAndCountAll({ limit, offset })
+  Ticket.findAndCountAll({
+    where: {
+      eventId: req.params.eventId
+    },
+    limit,
+    offset
+  })
     .then(tickets => res.send({ data: tickets.rows, total: tickets.count }))
     .catch(next);
 });

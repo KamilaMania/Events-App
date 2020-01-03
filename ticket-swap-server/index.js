@@ -5,6 +5,7 @@ const userRouter = require("./user/router");
 const loginRouter = require("./auth/router");
 const eventRouter = require("./events/router");
 const ticketRouter = require("./tickets/router");
+const commentRouter = require("./comments/router");
 const app = express();
 const corsMiddleware = cors();
 const bodyParserMiddleware = bodyParser.json();
@@ -16,5 +17,6 @@ app.use(userRouter);
 app.use(loginRouter);
 app.use(eventRouter);
 app.use(ticketRouter);
+app.use(commentRouter);
 
 app.listen(port, () => console.log(`Server listening on port ${port}`));
