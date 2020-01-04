@@ -11,5 +11,17 @@ const User = sequelize.define("user", {
     allowNull: false
   }
 });
-
+sequelize
+  .sync()
+  .then(() => User.truncate())
+  .then(() =>
+    User.create({
+      email: "a@a",
+      password: "a"
+    })
+  )
+  .then(ticket => {
+    console.log(ticket.toJSON());
+  })
+  .catch(error => console.log(error));
 module.exports = User;

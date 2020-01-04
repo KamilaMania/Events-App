@@ -8,13 +8,13 @@ export function selectedCommentsSuccess(comments) {
   };
 }
 
-export function commentsSuccess(ticketId) {
+export function fetchComments(ticketId) {
   return function thunk(dispatch, getState) {
     superagent
-      .get(`${baseUrl}/tickets/comments/${ticketId}`)
+      .get(`${baseUrl}/comments/${ticketId}`)
       .then(response => {
         console.log("fetch comments data test", response);
-        const action = selectedCommentsSuccess(response.body.comments);
+        const action = selectedCommentsSuccess(response.body.data);
         dispatch(action);
       })
       .catch(err => console.log("err", err));
@@ -28,7 +28,7 @@ export function createCommentSuccess(comment) {
   };
 }
 
-export function createCommentSuccess(comment) {
+export function postCommentSuccess(comment) {
   return function thunk(dispatch, getState) {
     superagent
       .get(`${baseUrl}/tickets/comments}`)

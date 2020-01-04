@@ -7,6 +7,7 @@ import eventsReducer from "./events/reducer";
 import eventReducer from "./event/reducer";
 import ticketsReducer from "./tickets/reducer";
 import ticketReducer from "./ticket/reducer";
+import commentsReducer from "./comment/reducer";
 import { connectRouter } from "connected-react-router";
 
 // import tickets from "./tickets/reducer";
@@ -22,6 +23,7 @@ const createRootReducer = history =>
     event: eventReducer,
     tickets: ticketsReducer,
     ticket: ticketReducer,
+    comments: commentsReducer,
     router: connectRouter(history)
   });
 export default createRootReducer;

@@ -15,6 +15,22 @@ router.get("/tickets/:eventId", (req, res, next) => {
     .then(tickets => res.send({ data: tickets.rows, total: tickets.count }))
     .catch(next);
 });
+router.get("/userTickets/:userId", (req, res, next) => {
+  const limit = req.query.limit || 25;
+  const offset = req.query.offset || 0;
+  Ticket.findAndCountAll({
+    where: {
+      userId: req.params.userId
+    },
+    limit,
+    offset
+  })
+    .then(tickets => {
+      console.log(tickets);
+      return res.send({ data: tickets.rows, total: tickets.count });
+    })
+    .catch(next);
+});
 router.post("/ticket", (req, res, next) => {
   Ticket.create(req.body)
     .then(ticket => res.send(ticket))

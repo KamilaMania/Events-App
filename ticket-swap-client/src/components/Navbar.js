@@ -27,7 +27,7 @@ import "./Login.css";
 class Navbar extends Component {
   handleLogout = event => {
     event.preventDefault();
-    this.props.dispatch(logOutSuccess());
+    this.props.dispatch(logOutSuccess(null));
     this.props.history.push("/login");
   };
 

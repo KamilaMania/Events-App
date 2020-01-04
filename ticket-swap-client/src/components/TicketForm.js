@@ -9,7 +9,7 @@ import "./EventForm.css";
 
 class TicketForm extends React.Component {
   state = {
-    name: "",
+    price: "",
     description: "",
     urlLogo: ""
   };
@@ -23,16 +23,17 @@ class TicketForm extends React.Component {
       console.log("edit");
       const ticket = Object.assign({}, this.state, {
         id: id,
+        userId: 1,
         eventId: this.props.event.id
       });
       this.props.put(ticket);
     } else {
       const ticket = Object.assign({}, this.state, {
-        eventId: this.props.event.id
+        eventId: this.props.event.id,
+        userId: 1
       });
       this.props.post(ticket);
     }
-    // this.props.onSubmit(this.state);
   };
 
   handleChange = ticket => {
@@ -43,7 +44,21 @@ class TicketForm extends React.Component {
     });
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    const id = parseInt(this.props.path.split("/").pop());
+    if (id) {
+      this.props.fetch(id);
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.ticket !== this.props.ticket) {
+      this.setState({
+        price: nextProps.ticket.price,
+        urlLogo: nextProps.ticket.urlLogo,
+        description: nextProps.ticket.description
+      });
+    }
+  }
 
   render() {
     const initialValues = this.props.initialValues || {};

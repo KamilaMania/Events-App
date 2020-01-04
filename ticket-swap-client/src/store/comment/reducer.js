@@ -1,13 +1,13 @@
 const initialState = {
-  events: []
+  comments: []
 };
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case FETCH_COMMENTS_SUCCESS:
+    case "FETCH_COMMENTS_SUCCESS":
       return { comments: action.payload };
-    case CREATE_COMMENTS_SUCCESS:
-      return [...state, action.payload];
+    case "CREATE_COMMENTS_SUCCESS":
+      return { comments: [...state, action.payload] };
     default:
       return state;
   }
