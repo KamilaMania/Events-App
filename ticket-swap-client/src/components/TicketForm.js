@@ -1,12 +1,38 @@
+import { connect } from "react-redux";
 import React from "react";
-import "./TicketForm.css";
+import {
+  createTicket,
+  updateTicket,
+  fetchTicket
+} from "../store/tickets/actions";
+import "./EventForm.css";
 
-export default class TicketForm extends React.Component {
-  state = {};
+class TicketForm extends React.Component {
+  state = {
+    name: "",
+    description: "",
+    urlLogo: ""
+  };
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit(this.state);
+    const id = parseInt(this.props.path.split("/").pop());
+    console.log(id);
+    console.log(this.state);
+    if (id) {
+      console.log("edit");
+      const ticket = Object.assign({}, this.state, {
+        id: id,
+        eventId: this.props.event.id
+      });
+      this.props.put(ticket);
+    } else {
+      const ticket = Object.assign({}, this.state, {
+        eventId: this.props.event.id
+      });
+      this.props.post(ticket);
+    }
+    // this.props.onSubmit(this.state);
   };
 
   handleChange = ticket => {
@@ -17,6 +43,8 @@ export default class TicketForm extends React.Component {
     });
   };
 
+  componentDidMount() {}
+
   render() {
     const initialValues = this.props.initialValues || {};
     return (
@@ -25,12 +53,13 @@ export default class TicketForm extends React.Component {
           <label htmlFor="picture">Picture</label>
           <br />
           <input
-            name="picture"
-            id="picture"
+            name="urlLogo"
+            type="text"
+            id="urlLogo"
             value={
-              this.state.picture !== undefined
-                ? this.state.picture
-                : initialValues.picture || ""
+              this.state.urlLogo !== undefined
+                ? this.state.urlLogo
+                : initialValues.urlLogo || ""
             }
             onChange={this.handleChange}
           />
@@ -41,6 +70,7 @@ export default class TicketForm extends React.Component {
           <br />
           <input
             name="price"
+            type="number"
             id="price"
             value={
               this.state.price !== undefined
@@ -54,8 +84,9 @@ export default class TicketForm extends React.Component {
         <div>
           <label htmlFor="description">Description</label>
           <br />
-          <input
+          <textarea
             name="description"
+            type="text"
             id="description"
             value={
               this.state.description !== undefined
@@ -63,7 +94,7 @@ export default class TicketForm extends React.Component {
                 : initialValues.description || ""
             }
             onChange={this.handleChange}
-          />
+          ></textarea>
         </div>
 
         <button type="submit" className="button">
@@ -73,3 +104,16 @@ export default class TicketForm extends React.Component {
     );
   }
 }
+const mapDispatchToProps = dispatch => {
+  return {
+    post: ticket => dispatch(createTicket(ticket)),
+    put: ticket => dispatch(updateTicket(ticket)),
+    fetch: id => dispatch(fetchTicket(id))
+  };
+};
+const mapStateToProps = state => ({
+  path: state.router.location.pathname,
+  ticket: state.ticket.ticket,
+  event: state.event.event
+});
+export default connect(mapStateToProps, mapDispatchToProps)(TicketForm);

@@ -11,7 +11,7 @@ router.get("/comments", (req, res, next) => {
 });
 router.post("/comment", (req, res, next) => {
   Comment.create(req.body)
-    .then(event => res.send(event))
+    .then(comment => res.send(comment))
     .catch(next);
 });
 
@@ -23,8 +23,8 @@ router.get("/comment/:id", (req, res, next) => {
 
 router.put("/comment/:id", (req, res, next) => {
   Comment.findByPk(req.params.id)
-    .then(event => event.update(req.body))
-    .then(event => res.send(event))
+    .then(comment => comment.update(req.body))
+    .then(comment => res.send(comment))
     .catch(next);
 });
 

@@ -9,6 +9,8 @@ import Event from "./components/Event";
 import ReduxToastr from "react-redux-toastr";
 import EventsList from "./components/EventsList";
 import EventForm from "./components/EventForm";
+import Ticket from "./components/Ticket";
+import TicketForm from "./components/TicketForm";
 
 class App extends Component {
   render() {
@@ -27,6 +29,9 @@ class App extends Component {
           <Route path="/events" exact component={EventsList} />
           <Route path="/event/:id" exact component={Event} />
           <Route path="/event/edit/:id" exact component={EventForm} />
+
+          <Route path="/ticket/:id" exact component={Ticket} />
+          <Route path="/ticket/edit/:id" exact component={TicketForm} />
 
           {/* <Route path="/logout" component={LogoutPage} /> */}
           <Route component={Homepage} />

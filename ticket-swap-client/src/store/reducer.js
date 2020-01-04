@@ -6,6 +6,7 @@ import { reducer as toastrReducer } from "react-redux-toastr";
 import eventsReducer from "./events/reducer";
 import eventReducer from "./event/reducer";
 import ticketsReducer from "./tickets/reducer";
+import ticketReducer from "./ticket/reducer";
 import { connectRouter } from "connected-react-router";
 
 // import tickets from "./tickets/reducer";
@@ -20,6 +21,7 @@ const createRootReducer = history =>
     events: eventsReducer,
     event: eventReducer,
     tickets: ticketsReducer,
+    ticket: ticketReducer,
     router: connectRouter(history)
   });
 export default createRootReducer;

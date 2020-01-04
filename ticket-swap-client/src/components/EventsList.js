@@ -12,15 +12,6 @@ import CardHeader from "@material-ui/core/CardHeader";
 import "./Login.css";
 import { Link } from "react-router-dom";
 
-// const useStyles = makeStyles({
-//   card: {
-//     maxWidth: 345,
-//   },
-//   media: {
-//     height: 140,
-//   },
-// });
-
 export default class EventsList extends React.Component {
   // constructor(props) {
   //   super(props);
@@ -52,6 +43,9 @@ export default class EventsList extends React.Component {
             to={"/event/edit/" + this.props.data.id}
           >
             Edit Event
+          </Button>
+          <Button size="small" color="primary">
+            Delete event
           </Button>
         </CardActions>
       </Card>

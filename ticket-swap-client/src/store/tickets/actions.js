@@ -31,7 +31,7 @@ export function selectedTicketSuccess(ticket) {
 export function fetchTicket(ticketId) {
   return function thunk(dispatch, getState) {
     superagent
-      .get(`${baseUrl}/tickets/${ticketId}`)
+      .get(`${baseUrl}/ticket/${ticketId}`)
       .then(response => {
         console.log("fetch ticket data test", response);
         const action = selectedTicketSuccess(response.body);
@@ -51,7 +51,7 @@ export function createTicketSuccess(ticket) {
 export function createTicket(ticket) {
   return function thunk(dispatch, getState) {
     superagent
-      .post(`${baseUrl}/tickets`)
+      .post(`${baseUrl}/ticket`)
       .send(ticket)
       .then(response => {
         console.log("add ticket data test", response);

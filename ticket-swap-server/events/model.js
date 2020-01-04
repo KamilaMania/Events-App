@@ -141,6 +141,28 @@ sequelize
       endDate: new Date("2020-06-15")
     })
   )
+  .then(() =>
+    Event.create({
+      title: "Boomb Festival",
+      description:
+        "Amsterdam is set aglow during the Amsterdam Light Festival, when artists from around the world are given the chance to create elaborate light displays along the city's iconic canals.",
+      urlLogo:
+        "https://www.iamexpat.nl/sites/default/files/styles/article--full/public/amsterdam-houses-water.jpg?itok=0ca8qlHf",
+      startDate: new Date("2019-09-27"),
+      endDate: new Date("2019-09-27")
+    })
+  )
+  .then(() =>
+    Event.create({
+      title: "Pass or Fail Festival",
+      description:
+        "Amsterdam is set aglow during the Amsterdam Light Festival, when artists from around the world are given the chance to create elaborate light displays along the city's iconic canals.",
+      urlLogo:
+        "https://www.iamexpat.nl/sites/default/files/styles/article--full/public/amsterdam-houses-water.jpg?itok=0ca8qlHf",
+      startDate: new Date("2019-03-27"),
+      endDate: new Date("2019-03-27")
+    })
+  )
 
   .then(event => {
     console.log(event.toJSON());

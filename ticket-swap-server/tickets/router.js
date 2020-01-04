@@ -17,7 +17,7 @@ router.get("/tickets/:eventId", (req, res, next) => {
 });
 router.post("/ticket", (req, res, next) => {
   Ticket.create(req.body)
-    .then(event => res.send(event))
+    .then(ticket => res.send(ticket))
     .catch(next);
 });
 
