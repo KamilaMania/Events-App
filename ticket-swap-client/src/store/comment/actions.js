@@ -28,14 +28,14 @@ export function createCommentSuccess(comment) {
   };
 }
 
-export function postCommentSuccess(comment) {
+export function postComment(comment) {
   return function thunk(dispatch, getState) {
     superagent
-      .get(`${baseUrl}/tickets/comments}`)
+      .post(`${baseUrl}/comment`)
       .send(comment)
       .then(response => {
         console.log("fetch comment data test", response);
-        const action = createCommentSuccess(response.body.comment);
+        const action = createCommentSuccess(response.body);
         dispatch(action);
       })
       .catch(err => console.log("err", err));

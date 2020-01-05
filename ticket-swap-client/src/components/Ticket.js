@@ -1,8 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchTicket, fetchTicketsPerUser } from "../store/tickets/actions";
-import { fetchComments } from "../store/comment/actions";
+import { fetchComments, postComment } from "../store/comment/actions";
 import factorCalculator from "./Factor";
+import CommentForm from "./CommentForm";
 
 class Ticket extends React.Component {
   state = {
@@ -21,9 +22,9 @@ class Ticket extends React.Component {
         nextProps.userTickets !== this.props.userTickets ||
         nextProps.ticket !== this.props.ticket) &&
       nextProps.tickets.length &&
-        nextProps.userTickets &&
-        nextProps.comments &&
-        nextProps.ticket
+      nextProps.userTickets &&
+      nextProps.comments &&
+      nextProps.ticket
     ) {
       const prices = nextProps.tickets.map(ticket => parseFloat(ticket.price));
       const factor = factorCalculator(
@@ -35,6 +36,14 @@ class Ticket extends React.Component {
       );
       this.setState({ riskFactor: factor.toFixed(2) });
     }
+  }
+  addComment(content) {
+    const comment = {
+      userId: 1,
+      ticketId: this.props.ticket.id,
+      content: content
+    };
+    this.props.dispatch(postComment(comment));
   }
 
   render() {
@@ -51,6 +60,19 @@ class Ticket extends React.Component {
             <img src={this.props.ticket.urlLogo} />
           </div>
         )}
+        {this.props.comments.length && (
+          <div>
+            <h3>Comments</h3>
+            {this.props.comments.map(comment => (
+              <p>{comment.content}</p>
+            ))}
+          </div>
+        )}
+        <CommentForm
+          onSubmit={content => {
+            this.addComment(content);
+          }}
+        />
       </div>
     );
   }

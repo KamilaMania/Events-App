@@ -7,7 +7,7 @@ export default function reducer(state = initialState, action = {}) {
     case "FETCH_COMMENTS_SUCCESS":
       return { comments: action.payload };
     case "CREATE_COMMENTS_SUCCESS":
-      return { comments: [...state, action.payload] };
+      return { comments: [...state.comments, action.payload] };
     default:
       return state;
   }

@@ -9,7 +9,7 @@ export default function reducer(state = initialState, action = {}) {
       return { tickets: action.payload, userTickets: state.userTickets };
     case "ADD_TICKET_SUCCESS":
       return {
-        tickets: [...state, action.payload],
+        tickets: [...state.tickets, action.payload],
         userTickets: state.userTickets
       };
     case "UPDATE_TICKET_SUCCESS":

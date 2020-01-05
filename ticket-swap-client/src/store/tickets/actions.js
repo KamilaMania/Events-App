@@ -75,8 +75,10 @@ export function createTicket(ticket) {
       .send(ticket)
       .then(response => {
         console.log("add ticket data test", response);
-        const action = createTicketSuccess(response.body.ticket);
+        const action = createTicketSuccess(response.body);
         dispatch(action);
+        dispatch(push("/event/" + response.body.eventId));
+        toastr.success("Ticket added", "Your Ticket successfully added");
       })
       .catch(err => console.log("err", err));
   };

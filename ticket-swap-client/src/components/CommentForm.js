@@ -2,11 +2,15 @@ import React from "react";
 import "./CommentForm.css";
 
 export default class CommentForm extends React.Component {
-  state = {};
+  state = {
+    content: ""
+  };
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.onSubmit(this.state);
+    if (this.state.content) {
+      this.props.onSubmit(this.state.content);
+    }
   };
 
   handleChange = comment => {
