@@ -63,8 +63,8 @@ class Ticket extends React.Component {
         {this.props.comments.length && (
           <div>
             <h3>Comments</h3>
-            {this.props.comments.map(comment => (
-              <p>{comment.content}</p>
+            {this.props.comments.map((comment, i) => (
+              <p key={i}>{comment.content}</p>
             ))}
           </div>
         )}

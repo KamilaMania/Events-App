@@ -16,7 +16,7 @@ export default function factorCalculator(
     factor += Math.abs(difference);
     console.log("Cheaper than avg by " + difference);
   } else {
-    factor -= difference;
+    difference <= 10 ? (factor -= difference) : (factor -= 10);
     console.log("higher than avg by " + difference);
   }
 
