@@ -28,10 +28,10 @@ router.put("/event/:id", (req, res, next) => {
     .catch(next);
 });
 
-router.delete("/event/:id", (req, res, next) => {
-  Event.destroy({ where: { id: req.params.id } })
-    .then(number => res.send({ number }))
-    .catch(next);
-});
+// router.delete("/event/:id", (req, res, next) => {
+//   Event.destroy({ where: { id: req.params.id } })
+//     .then(number => res.send({ number }))
+//     .catch(next);
+// });
 
 module.exports = router;

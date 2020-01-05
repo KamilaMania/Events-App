@@ -10,10 +10,6 @@ import ticketReducer from "./ticket/reducer";
 import commentsReducer from "./comment/reducer";
 import { connectRouter } from "connected-react-router";
 
-// import tickets from "./tickets/reducer";
-// import ticket from "./ticket/reducer";
-// import comment from "./comment/reducer";
-
 const createRootReducer = history =>
   combineReducers({
     signUp: authReducer,

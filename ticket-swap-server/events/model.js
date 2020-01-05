@@ -2,10 +2,6 @@ const Sequelize = require("sequelize");
 const sequelize = require("../db");
 
 const Event = sequelize.define("event", {
-  // id: {
-  //   type: Sequelize.INTEGER,
-  //   allowNull: false
-  // },
   title: {
     type: Sequelize.STRING,
     allowNull: false

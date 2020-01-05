@@ -9,12 +9,6 @@ export function ticketsSuccess(tickets) {
     payload: tickets
   };
 }
-export function userTicketsSuccess(tickets) {
-  return {
-    type: "FETCH_USER_TICKETS_SUCCESS",
-    payload: tickets
-  };
-}
 
 export function fetchTickets(eventId) {
   return function thunk(dispatch, getState) {
@@ -48,6 +42,14 @@ export function fetchTicket(ticketId) {
       .catch(err => console.log("err", err));
   };
 }
+
+export function userTicketsSuccess(tickets) {
+  return {
+    type: "FETCH_USER_TICKETS_SUCCESS",
+    payload: tickets
+  };
+}
+
 export function fetchTicketsPerUser(userId) {
   return function thunk(dispatch, getState) {
     superagent
@@ -98,6 +100,7 @@ export function updateTicket(ticket) {
       .catch(err => console.log("err", err));
   };
 }
+
 export function specificTicketsSuccess(tickets) {
   return {
     type: "FETCH_SPECIFIC_TICKETS_SUCCESS",

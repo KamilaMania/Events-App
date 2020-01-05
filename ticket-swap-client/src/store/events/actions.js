@@ -80,19 +80,3 @@ export function editEvent(event) {
       .catch(err => console.log("err", err));
   };
 }
-
-// export function deleteEvent(event) {
-//   console.log(event);
-//   return function thunk(dispatch, getState) {
-//     superagent
-//       .put(`${baseUrl}/event/${event.id}`)
-//       .then(response => {
-//         console.log("delete " + response);
-//         const action = fetchEvents();
-//         dispatch(action);
-//         dispatch(push("/"));
-//         toastr.success("Event deleted", "Your event has been deleted");
-//       })
-//       .catch(err => console.log("err", err));
-//   };
-// }

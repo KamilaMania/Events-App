@@ -1,6 +1,4 @@
 import React from "react";
-//import { fetchEvent } from "../store/event/actions";
-//import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchEvent } from "../store/events/actions";
 import { fetchTickets } from "../store/tickets/actions";

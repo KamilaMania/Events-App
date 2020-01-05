@@ -27,11 +27,11 @@ router.get("/comment/:id", (req, res, next) => {
     .catch(next);
 });
 
-router.put("/comment/:id", (req, res, next) => {
-  Comment.findByPk(req.params.id)
-    .then(comment => comment.update(req.body))
-    .then(comment => res.send(comment))
-    .catch(next);
-});
+// router.put("/comment/:id", (req, res, next) => {
+//   Comment.findByPk(req.params.id)
+//     .then(comment => comment.update(req.body))
+//     .then(comment => res.send(comment))
+//     .catch(next);
+// });
 
 module.exports = router;

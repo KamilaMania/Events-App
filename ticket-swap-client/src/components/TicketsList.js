@@ -10,18 +10,15 @@ import Paper from "@material-ui/core/Paper";
 export default class TicketList extends React.Component {
   componentDidMount() {
     this.props.dispatch(fetchTickets(this.props.match.params.id));
-    //this.props.fetchTicket();
   }
 
   render() {
-    //return <span>test</span>;
-
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="caption table">
-        <caption>A barbone structure table example with a caption</caption>
+        <caption></caption>
         <TableHead>
           <TableRow>
-            <TableCell>Price)</TableCell>
+            <TableCell>Price in euro)</TableCell>
             <TableCell align="right">Description</TableCell>
             <TableCell align="right">Picture</TableCell>
           </TableRow>
